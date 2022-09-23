@@ -17,6 +17,12 @@ const Cell = ({ note, noteIndex, rowIndex, toggleNote, position}) => {
         }
     }
 
+    const getDownbeat = () => {
+        if ((noteIndex + 32) % 4 === 0) {
+            return 'downbeat'
+        } else return ''
+    }
+
     const handleClick = (e) => {
         toggleNote(rowIndex, noteIndex)
         console.log(note)
@@ -25,7 +31,7 @@ const Cell = ({ note, noteIndex, rowIndex, toggleNote, position}) => {
 
     return (
         <>
-            <button className={`cell hover ` + getBackground()} name={note.note} onClick={handleClick}>{' '}</button>
+            <button className={`cell hover` + ' ' + getBackground() + ' ' + getDownbeat()} name={note.note} onClick={handleClick}>{' '}</button>
         </>
     )
 }

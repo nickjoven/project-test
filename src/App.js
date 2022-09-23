@@ -19,7 +19,65 @@ const play = (e) => {
   sampler.triggerAttackRelease(e.target.name)
 }
 
-const noteMap = (['C1', 'E1', 'G1', 'B1', 'A3', 'B3', 'D4', 'E4', 'G4'].reverse())
+// [
+//   'C3',
+//   'C#3',
+//   'D3',
+//   'D#3',
+//   'E3',
+//   'F3',
+//   'F#3',
+//   'G3',
+//   'G#3',
+//   'A3',
+//   'A#3',
+//   'B3',
+//   'C4',
+//   'C#4',
+//   'D4',
+//   'D#4',
+//   'E4',
+//   'F4',
+//   'F#4',
+//   'G4',
+//   'G#4',
+//   'A4',
+//   'A#4',
+//   'B4',
+//   'C5'
+// ]
+
+const noteMap = ([
+  'C1',
+  'E1',
+  'G1',
+  'B1',
+  'C3',
+  'C#3',
+  'D3',
+  'D#3',
+  'E3',
+  'F3',
+  'F#3',
+  'G3',
+  'G#3',
+  'A3',
+  'A#3',
+  'B3',
+  'C4',
+  'C#4',
+  'D4',
+  'D#4',
+  'E4',
+  'F4',
+  'F#4',
+  'G4',
+  'G#4',
+  'A4',
+  'A#4',
+  'B4',
+  'C5'
+].reverse())
 
 const makeGrid = (noteArray) => {
   let rows = []
@@ -79,7 +137,7 @@ const App = () => {
       setPosition(step)
     }
 
-    Tone.Transport.bpm.value = 80
+    Tone.Transport.bpm.value = 88
     Tone.Transport.scheduleRepeat(repeat, "16n")
   }
 
@@ -97,16 +155,30 @@ const App = () => {
 
   return (
     <div className='App'>
-      <h2>{position}</h2>
+      <h2>{(position + 32 - 3) % 32}</h2>
       <button onClick={start}>Play</button>
       <button onClick={logSequence}>Sequence</button>
-      <div className='row-container'>
-        {sequence.map((row, rowIndex) => {
-          return (
-            <Row key={rowIndex} rowIndex={rowIndex} row={row} play={play} toggleNote={toggleNote} position={position}/>
-            )
-        })}
-        </div>
+      <button onClick={configLoop}>H</button>
+      <div className='centered-content'>
+        <div className='row-container'>
+          <div className='piano-roll'>
+            {noteMap.map((note) => {
+              return (
+                <div className={'roll-note' + ' ' + (note.includes('#') ? 'accidental': '' )} key={note} >
+                  {note}
+                </div>
+              )
+            })}
+          </div>
+          <div className='grid-container'>
+            {sequence.map((row, rowIndex) => {
+              return (
+                <Row key={rowIndex} rowIndex={rowIndex} row={row} play={play} toggleNote={toggleNote} position={position}/>
+                )
+              })}
+            </div>
+          </div>
+      </div>
     </div>
   );
 }

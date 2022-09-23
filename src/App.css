@@ -4,7 +4,7 @@
 }
 
 .row-container {
-
+  display: flex;
 }
 .row {
   width: auto;
@@ -14,9 +14,9 @@
 
 .cell {
   width: 32px;
-  height: 24px;
+  height: 20px;
   border: 0px;
-  margin-bottom: 2px;
+  margin: 2px;
 }
 
 .hover {
@@ -49,4 +49,24 @@
 
 .waiting {
   background-color: #f9f9f9;
+}
+
+.piano-roll {
+  height: 100%
+}
+
+.roll-note {
+  width: 72px;
+  height: 20px;
+  border: 2px solid black;
+}
+
+.accidental {
+  background-color: black;
+  color: white;
+}
+
+.centered-content {
+  display: flex;
+  justify-content: center;
 }
