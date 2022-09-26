@@ -12,6 +12,8 @@ const Cell = ({ note, noteIndex, rowIndex, toggleNote, position}) => {
                 return 'on'
             case !noteOn && barHover:
                 return 'barHover'
+            case note.note.includes('#'):
+                return 'waiting-accidental'
             default:
                 return 'waiting'
         }
