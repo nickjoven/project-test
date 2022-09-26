@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import * as Tone from 'tone'
 import './App.css';
+import SimpleEditor from './components/SimpleEditor';
 import Row from './components/Row'
 
 const stepsPerSegment = 4
@@ -20,35 +21,39 @@ const play = (e) => {
 }
 
 const noteMap = ([
-  'C1',
-  'E1',
-  'G1',
-  'B1',
-  'C3',
-  'C#3',
-  'D3',
-  'D#3',
-  'E3',
-  'F3',
-  'F#3',
-  'G3',
-  'G#3',
-  'A3',
-  'A#3',
-  'B3',
-  'C4',
-  'C#4',
-  'D4',
-  'D#4',
-  'E4',
-  'F4',
-  'F#4',
-  'G4',
-  'G#4',
-  'A4',
-  'A#4',
-  'B4',
-  'C5'
+  { note: 'C1', category: 'percussion' },
+  { note: 'E1', category: 'percussion' },
+  { note: 'G1', category: 'percussion' },
+  { note: 'B1', category: 'percussion' },
+  { note: 'C3', category: 'pitch' },
+  { note: 'C#3', category: 'pitch' },
+  { note: 'D3', category: 'pitch' },
+  { note: 'D#3', category: 'pitch' },
+  { note: 'E3', category: 'pitch' },
+  { note: 'F3', category: 'pitch' },
+  { note: 'F#3', category: 'pitch' },
+  { note: 'G3', category: 'pitch' },
+  { note: 'G#3', category: 'pitch' },
+  { note: 'A3', category: 'pitch' },
+  { note: 'A#3', category: 'pitch' },
+  { note: 'B3', category: 'pitch' },
+  { note: 'C4', category: 'pitch' },
+  { note: 'C#4', category: 'pitch' },
+  { note: 'D4', category: 'pitch' },
+  { note: 'D#4', category: 'pitch' },
+  { note: 'E4', category: 'pitch' },
+  { note: 'F4', category: 'pitch' },
+  { note: 'F#4', category: 'pitch' },
+  { note: 'G4', category: 'pitch' },
+  { note: 'G#4', category: 'pitch' },
+  { note: 'A4', category: 'pitch' },
+  { note: 'A#4', category: 'pitch' },
+  { note: 'B4', category: 'pitch' },
+  { note: 'C5', category: 'pitch' },
+  { note: 'C#5', category: 'pitch' },
+  { note: 'D5', category: 'pitch' },
+  { note: 'D#5', category: 'pitch' },
+  { note: 'E5',	category: 'pitch' }
 ].reverse())
 
 const makeGrid = (noteArray) => {
@@ -63,7 +68,8 @@ const makeRow = (note, rows) => {
   let row = []
   for (let i = 0; i < stepsPerSequence; i++) {
     let _note = {
-      note: note,
+      note: note.note,
+      category: note.category,
       isActive: false,
     }
     row.push(_note)
@@ -109,13 +115,14 @@ const App = () => {
       setPosition(step)
     }
 
-    Tone.Transport.bpm.value = 72  
+    Tone.Transport.bpm.value = 57  
     Tone.Transport.scheduleRepeat(repeat, "16n")
   }
 
   const logSequence = () => {
     console.log(sequence)
     console.log(position)
+    console.log(sequence.filter((element, index) => index < 29 ))
   }
 
   const toggleNote = (rowIndex, noteIndex) => {
@@ -127,6 +134,8 @@ const App = () => {
 
   return (
     <div className='App'>
+      {/* <SimpleEditor sequence={sequence} position={position} setSequence={setSequence} /> */}
+      <h1>Detailed UI</h1>
       <h2>{(position + 32 - 3) % 32}</h2>
       <button onClick={start}>Play</button>
       <button onClick={logSequence}>Sequence</button>
@@ -136,8 +145,8 @@ const App = () => {
           <div className='piano-roll'>
             {noteMap.map((note) => {
               return (
-                <div className={'roll-note' + ' ' + (note.includes('#') ? 'accidental': '' )} key={note} >
-                  {note}
+                <div className={'roll-note' + ' ' + (note.note.includes('#') ? 'accidental': '' )} key={note.note} >
+                  {note.note}
                 </div>
               )
             })}
