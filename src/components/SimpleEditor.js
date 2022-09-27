@@ -1,18 +1,35 @@
-import SimplePitchesContainer from "./SimplePitchesContainer"
-import SimplePercussionContainer from "./SimplePercussionContainer"
+import SimpleColumn from './SimpleColumn'
 
-const SimpleEditor = ({ sequence, position, setSequence }) => {
+const SimpleEditor = ({ sequence }) => {
 
-    const getPitches = () => {
-        sequence.filter((element, index) => index < 29)
+    const getBeat = (row, currentIndex) => {
+        let beat = []
+        for (let i = 0; i < 4; i++) {
+            beat.push(row[currentIndex + i])
+        }
+        return beat
     }
 
+    const getBeatColumns = () => {
+        let beats = []
+        for (let i = 0; i < 8; i++) {
+            let column = []
+            sequence.map((row) => {
+                column.push(getBeat(row, i * 4))    
+            }) 
+            beats.push(column)
+        } 
+        return beats
+    }
 
     return (
-        <div className='simple-editor'>
-            <h1>Simple UI</h1>
-            <div className='i-am-worm'>
-                <SimplePitchesContainer sequence={sequence} position={position} setSequence={setSequence} />
+        <div className='simple-editor-view'>
+            <div className='column-container'>
+            {sequence.length > 0 ? getBeatColumns().map((column, columnIndex) => {
+                return (
+                    <SimpleColumn key={columnIndex} columnIndex={columnIndex} column={column} />
+                    )
+                }): <></> }
             </div>
         </div>
     )

@@ -4,9 +4,9 @@ import './App.css';
 import SimpleEditor from './components/SimpleEditor';
 import Row from './components/Row'
 
-const stepsPerSegment = 4
-const segmentsPerSequence = 8
-const stepsPerSequence = stepsPerSegment * segmentsPerSequence
+const stepsPerBeat = 4
+const BeatsPerSequence = 8
+const stepsPerSequence = stepsPerBeat * BeatsPerSequence
 
 const sampler = new Tone.Sampler({
   'C1': '/kick.wav',
@@ -134,7 +134,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      {/* <SimpleEditor sequence={sequence} position={position} setSequence={setSequence} /> */}
+      <SimpleEditor sequence={sequence} />
       <h1>Detailed UI</h1>
       <h2>{(position + 32 - 3) % 32}</h2>
       <button onClick={start}>Play</button>
