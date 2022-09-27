@@ -1,11 +1,11 @@
-import SimplePitchCell from "./SimplePitchCell"
+import SimplePitchCell from './SimplePitchCell'
 
-const SimplePitchRow = ({ row }) => {
+const SimplePitchRow = ({ row, rowIndex, position, columnIndex }) => {
     return (
-        <div className='simple-row'>
+        <div className='simple-pitch-row'>
             {row.map((note, noteIndex) => {
                 return (
-                    <SimplePitchCell key={noteIndex} note={note} noteIndex={noteIndex} />
+                    <SimplePitchCell key={noteIndex} note={note} noteIndex={noteIndex} sequenceIndex={noteIndex + (columnIndex * 4)} position={position} />
                 )
             })}
         </div>

@@ -71,6 +71,33 @@
   justify-content: center;
 }
 
-.simple-row{
-  display:flex;
+.column-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.simple-pitch-row {
+  display: flex;
+}
+
+.simple-percussion-row {
+  display: flex;
+}
+
+.cell-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.simple-pitch-cell {
+  width: 5px;
+  height: 5px;
+  border: 0px;
+}
+
+.simple-percussion-cell {
+  width: 5px;
+  height: 5px;
+  border: 0px;
 }

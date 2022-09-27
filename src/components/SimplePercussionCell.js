@@ -1,4 +1,4 @@
-const SimplePitchCell = ({ note, noteIndex, position, sequenceIndex }) => {
+const SimplePercussionCell = ({ note, noteIndex, position, sequenceIndex }) => {
     const getBackground = () => {
         let noteOn = note.isActive
         let barHover = sequenceIndex === (position + 32 - 3) % 32
@@ -17,10 +17,10 @@ const SimplePitchCell = ({ note, noteIndex, position, sequenceIndex }) => {
     }
     return (
         <div className='cell-holder'>
-            <button className={'simple-pitch-cell hover' + ' ' + getBackground()}>{' '}</button>
+            <button className={'simple-percussion-cell hover' + ' ' + getBackground()}>{' '}</button>
         </div>
 
     )
 }
 
-export default SimplePitchCell
+export default SimplePercussionCell

@@ -1,10 +1,30 @@
-const SimpleColumn = ({ column, columnIndex }) => {
+import SimplePitchContainer from './SimplePitchContainer'
+import SimplePercussionContainer from './SimplePercussionContainer'
+
+const splitColumn = (column) => {
+    let splitArray = []
+    let pitches = []
+    let drums = []
+    for (let i = 0; i < 4; i++) {
+        drums.push(column[i + 29])
+    }
+    for (let i = 0; i < 29; i++) {
+        pitches.push(column[i])
+    }
+    splitArray.push(pitches, drums)
+    return splitArray
+}
+
+const SimpleColumn = ({ column, columnIndex, position }) => {
     const check = () => {
         console.log(column)
     }
+
     return (
         <div className='column'>
-            <button onClick={check}>{columnIndex}</button>
+            {/* <button onClick={check}>{columnIndex}</button> */}
+            <SimplePitchContainer pitchColumn={splitColumn(column)[0]} position={position} columnIndex={columnIndex} />
+            <SimplePercussionContainer percussionColumn={splitColumn(column)[1]} position={position} columnIndex={columnIndex} />
         </div>
     )
 }

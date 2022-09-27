@@ -108,21 +108,20 @@ const App = () => {
       sequence.forEach((row) => {
         let note = row[step]
         if (note.isActive) {
-          sampler.triggerAttackRelease(note.note, "16n", time)
+          sampler.triggerAttackRelease(note.note, '16n', time)
         }
       })
       step = (step + 1) % 32
       setPosition(step)
     }
 
-    Tone.Transport.bpm.value = 57  
-    Tone.Transport.scheduleRepeat(repeat, "16n")
+    Tone.Transport.bpm.value = 120 
+    Tone.Transport.scheduleRepeat(repeat, '16n')
   }
 
   const logSequence = () => {
     console.log(sequence)
     console.log(position)
-    console.log(sequence.filter((element, index) => index < 29 ))
   }
 
   const toggleNote = (rowIndex, noteIndex) => {
@@ -134,7 +133,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <SimpleEditor sequence={sequence} />
+      <SimpleEditor sequence={sequence} position={position} />
       <h1>Detailed UI</h1>
       <h2>{(position + 32 - 3) % 32}</h2>
       <button onClick={start}>Play</button>
