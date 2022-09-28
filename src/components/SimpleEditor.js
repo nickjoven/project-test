@@ -24,12 +24,14 @@ const SimpleEditor = ({ sequence, position }) => {
 
     return (
         <div className='simple-editor-view'>
-            <div className='column-container'>
-            {sequence.length > 0 ? getBeatColumns().map((column, columnIndex) => {
-                return (
-                    <SimpleColumn key={columnIndex} columnIndex={columnIndex} column={column} position={position} />
-                    )
-                }): <></> }
+            <div className='centered-content'>
+                <div className='column-container'>
+                {sequence.length > 0 ? getBeatColumns().map((column, columnIndex) => {
+                    return (
+                        <SimpleColumn key={columnIndex} columnIndex={columnIndex} column={column} position={position} />
+                        )
+                    }): <></> }
+                </div>
             </div>
         </div>
     )

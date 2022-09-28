@@ -16,12 +16,9 @@ const splitColumn = (column) => {
 }
 
 const SimpleColumn = ({ column, columnIndex, position }) => {
-    const check = () => {
-        console.log(column)
-    }
 
     return (
-        <div className='column'>
+        <div className={`column-${columnIndex+1}`}>
             {/* <button onClick={check}>{columnIndex}</button> */}
             <SimplePitchContainer pitchColumn={splitColumn(column)[0]} position={position} columnIndex={columnIndex} />
             <SimplePercussionContainer percussionColumn={splitColumn(column)[1]} position={position} columnIndex={columnIndex} />

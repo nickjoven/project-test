@@ -81,6 +81,7 @@ let step = 0
 
 const App = () => {
   const [grid, setGrid] = useState(makeGrid(noteMap))
+  const [bpm, setBpm] = useState(120)
   const [sequence, setSequence] = useState(makeGrid(noteMap))
   const [started, setStarted] = useState(false)
   const [playing, setPlaying] = useState(false)
@@ -90,10 +91,12 @@ const App = () => {
     if (!started) {
       Tone.start()
       Tone.getDestination().volume.rampTo(-10, 0.001)
+      Tone.Transport.bpm.value = bpm 
       configLoop()
       setStarted(true)
     }
     if (playing) {
+      Tone.Transport.bpm.value = bpm 
       Tone.Transport.stop()
       setPlaying(false)
     } else {
@@ -114,8 +117,6 @@ const App = () => {
       step = (step + 1) % 32
       setPosition(step)
     }
-
-    Tone.Transport.bpm.value = 120 
     Tone.Transport.scheduleRepeat(repeat, '16n')
   }
 
