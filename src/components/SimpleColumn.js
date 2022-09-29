@@ -6,9 +6,9 @@ const splitColumn = (column) => {
     let pitches = []
     let drums = []
     for (let i = 0; i < 4; i++) {
-        drums.push(column[i + 29])
+        drums.push(column[i + 32])
     }
-    for (let i = 0; i < 29; i++) {
+    for (let i = 0; i < 32; i++) {
         pitches.push(column[i])
     }
     splitArray.push(pitches, drums)

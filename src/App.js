@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import * as Tone from 'tone'
-import './App.css';
-import SimpleEditor from './components/SimpleEditor';
+import './App.css'
+import SimpleEditor from './components/SimpleEditor'
+import Inputs from './components/Inputs'
 import Row from './components/Row'
 
 const stepsPerBeat = 4
@@ -20,11 +21,16 @@ const play = (e) => {
   sampler.triggerAttackRelease(e.target.name)
 }
 
+console.log(Tone.Frequency("A4").toMidi())
+
 const noteMap = ([
   { note: 'C1', category: 'percussion' },
   { note: 'E1', category: 'percussion' },
   { note: 'G1', category: 'percussion' },
   { note: 'B1', category: 'percussion' },
+  { note: 'A2', category: 'pitch' },
+  { note: 'A#2', category: 'pitch' },
+  { note: 'B2', category: 'pitch' },
   { note: 'C3', category: 'pitch' },
   { note: 'C#3', category: 'pitch' },
   { note: 'D3', category: 'pitch' },
@@ -92,7 +98,6 @@ const App = () => {
       Tone.start()
       Tone.getDestination().volume.rampTo(-10, 0.001)
       Tone.Transport.bpm.value = bpm 
-      configLoop()
       setStarted(true)
     }
     if (playing) {
@@ -105,20 +110,26 @@ const App = () => {
     }
   }
 
-
-  const configLoop = () => {
-    const repeat = (time) => {
-      sequence.forEach((row) => {
-        let note = row[step]
-        if (note.isActive) {
-          sampler.triggerAttackRelease(note.note, '16n', time)
-        }
-      })
-      step = (step + 1) % 32
-      setPosition(step)
+  useEffect(() => {
+    const configLoop = () => {
+      const repeat = (time) => {
+        sequence.forEach((row) => {
+          let note = row[step]
+          if (note.isActive) {
+            sampler.triggerAttackRelease(note.note, '16n', time)
+          }
+        })
+        step = (step + 1) % 32
+        setPosition(step)
+      }
+      Tone.Transport.scheduleRepeat(repeat, '16n')
     }
-    Tone.Transport.scheduleRepeat(repeat, '16n')
-  }
+    if (started) {
+      console.log('loop')
+      configLoop()
+    } 
+  }, [started])
+  
 
   const logSequence = () => {
     console.log(sequence)
@@ -130,6 +141,19 @@ const App = () => {
     sequenceCopy[rowIndex][noteIndex].isActive = !sequenceCopy[rowIndex][noteIndex].isActive
     setSequence(sequenceCopy)
   }
+
+  const handleBpmChange = (e) => {
+    switch (true) {
+
+      case (e.target.value > 240):
+        setBpm(240)
+      case (e.target.value < 40):
+        setBpm(40)
+      default:
+        setBpm(e.target.value)
+      }
+    Tone.Transport.bpm.value = bpm 
+  }
   
 
   return (
@@ -137,9 +161,9 @@ const App = () => {
       <SimpleEditor sequence={sequence} position={position} />
       <h1>Detailed UI</h1>
       <h2>{(position + 32 - 3) % 32}</h2>
+      <Inputs bpm={bpm} handleBpmChange={handleBpmChange} />
       <button onClick={start}>Play</button>
       <button onClick={logSequence}>Sequence</button>
-      <button onClick={configLoop}>H</button>
       <div className='centered-content'>
         <div className='row-container'>
           <div className='piano-roll'>
