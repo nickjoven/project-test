@@ -6,21 +6,21 @@ const splitColumn = (column) => {
     let pitches = []
     let drums = []
     for (let i = 0; i < 4; i++) {
-        drums.push(column[i + 32])
+        drums.push(column[i + 49])
     }
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < 49; i++) {
         pitches.push(column[i])
     }
     splitArray.push(pitches, drums)
     return splitArray
 }
 
-const SimpleColumn = ({ column, columnIndex, position }) => {
+const SimpleColumn = ({ column, columnIndex, position, applyPitchPattern }) => {
 
     return (
         <div className={`column-${columnIndex+1}`}>
             {/* <button onClick={check}>{columnIndex}</button> */}
-            <SimplePitchContainer pitchColumn={splitColumn(column)[0]} position={position} columnIndex={columnIndex} />
+            <SimplePitchContainer pitchColumn={splitColumn(column)[0]} position={position} columnIndex={columnIndex} applyPitchPattern={applyPitchPattern} />
             <SimplePercussionContainer percussionColumn={splitColumn(column)[1]} position={position} columnIndex={columnIndex} />
         </div>
     )

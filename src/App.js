@@ -14,6 +14,7 @@ const sampler = new Tone.Sampler({
   'E1': '/snare.wav',
   'G1': '/ophh.wav',
   'B1': '/clhh.wav',
+  'C2': '/cw_sound31.wav',
   'C4': '/cw_sound39.wav'
 }).toDestination();
 
@@ -21,46 +22,27 @@ const play = (e) => {
   sampler.triggerAttackRelease(e.target.name)
 }
 
-console.log(Tone.Frequency("A4").toMidi())
 
-const noteMap = ([
-  { note: 'C1', category: 'percussion' },
-  { note: 'E1', category: 'percussion' },
-  { note: 'G1', category: 'percussion' },
-  { note: 'B1', category: 'percussion' },
-  { note: 'A2', category: 'pitch' },
-  { note: 'A#2', category: 'pitch' },
-  { note: 'B2', category: 'pitch' },
-  { note: 'C3', category: 'pitch' },
-  { note: 'C#3', category: 'pitch' },
-  { note: 'D3', category: 'pitch' },
-  { note: 'D#3', category: 'pitch' },
-  { note: 'E3', category: 'pitch' },
-  { note: 'F3', category: 'pitch' },
-  { note: 'F#3', category: 'pitch' },
-  { note: 'G3', category: 'pitch' },
-  { note: 'G#3', category: 'pitch' },
-  { note: 'A3', category: 'pitch' },
-  { note: 'A#3', category: 'pitch' },
-  { note: 'B3', category: 'pitch' },
-  { note: 'C4', category: 'pitch' },
-  { note: 'C#4', category: 'pitch' },
-  { note: 'D4', category: 'pitch' },
-  { note: 'D#4', category: 'pitch' },
-  { note: 'E4', category: 'pitch' },
-  { note: 'F4', category: 'pitch' },
-  { note: 'F#4', category: 'pitch' },
-  { note: 'G4', category: 'pitch' },
-  { note: 'G#4', category: 'pitch' },
-  { note: 'A4', category: 'pitch' },
-  { note: 'A#4', category: 'pitch' },
-  { note: 'B4', category: 'pitch' },
-  { note: 'C5', category: 'pitch' },
-  { note: 'C#5', category: 'pitch' },
-  { note: 'D5', category: 'pitch' },
-  { note: 'D#5', category: 'pitch' },
-  { note: 'E5',	category: 'pitch' }
-].reverse())
+const getNoteMap = (lowestMidi) => {
+  let noteMap = [
+    { note: 'C1', midi: 24, category: 'percussion' },
+    { note: 'E1', midi: 28, category: 'percussion' },
+    { note: 'G1', midi: 31, category: 'percussion' },
+    { note: 'B1', midi: 35, category: 'percussion' },
+  ]
+  for (let i = lowestMidi; i < lowestMidi + 49; i++) {
+    let note = {}
+    note.note = Tone.Frequency(i, "midi").toNote()
+    note.midi = i
+    note.category = 'pitch'
+    noteMap.push(note)
+  }
+  return noteMap.reverse()
+}
+
+const noteMap = getNoteMap(36)
+
+// console.log('fn', getNoteMap(36))
 
 const makeGrid = (noteArray) => {
   let rows = []
@@ -75,6 +57,7 @@ const makeRow = (note, rows) => {
   for (let i = 0; i < stepsPerSequence; i++) {
     let _note = {
       note: note.note,
+      midi: note.midi,
       category: note.category,
       isActive: false,
     }
@@ -86,7 +69,6 @@ const makeRow = (note, rows) => {
 let step = 0
 
 const App = () => {
-  const [grid, setGrid] = useState(makeGrid(noteMap))
   const [bpm, setBpm] = useState(120)
   const [sequence, setSequence] = useState(makeGrid(noteMap))
   const [started, setStarted] = useState(false)
@@ -154,13 +136,62 @@ const App = () => {
       }
     Tone.Transport.bpm.value = bpm 
   }
+
+  const clearSequence = () => {
+    const emptySequence = []
+    sequence.forEach((row) => {
+      row.forEach((note) => {
+        note.isActive = false
+      })
+      emptySequence.push(row)
+      setSequence(emptySequence)
+    })
+  }
+
+  const clearColumn = (startIndex, categories = ['pitch', 'percussion']) => {
+    let sequenceCopy = [...sequence]
+    sequenceCopy.map((row) => {
+      row.map((note, index) => {
+        if (index >= startIndex && index < startIndex + 4 && categories.includes(note.category)) {
+          note.isActive = false
+        }
+      })
+    })
+    setSequence(sequenceCopy)
+  }
+
+  const applyPitchPattern = (pattern, startIndex, offset = 0) => {
+    clearColumn(startIndex, ['pitch'])
+    let sequenceCopy = [...sequence]
+    sequenceCopy.map((row, rowIndex) => {
+      row.map((note, index) => {
+        if (index >= startIndex && index < startIndex + 4 && note.category === 'pitch') {
+          // Math.floor(Math.random() * 10 + 1)
+          switch (true) {
+            case (rowIndex === (pattern[0] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+              note.isActive = true
+            case (rowIndex === (pattern[1] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+              note.isActive = true
+            case (rowIndex === (pattern[2] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+              note.isActive = true
+            case (rowIndex === (pattern[3] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+              note.isActive = true
+            default:
+              return
+          }
+        }
+      })
+    })
+  }
   
+  
+
 
   return (
     <div className='App'>
-      <SimpleEditor sequence={sequence} position={position} />
+      <SimpleEditor sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} />
       <h1>Detailed UI</h1>
-      <h2>{(position + 32 - 3) % 32}</h2>
+      <button onClick={clearSequence}>Clear</button>
       <Inputs bpm={bpm} handleBpmChange={handleBpmChange} />
       <button onClick={start}>Play</button>
       <button onClick={logSequence}>Sequence</button>
