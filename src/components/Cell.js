@@ -25,7 +25,12 @@ const Cell = ({ note, noteIndex, rowIndex, toggleNote, position, mouseDown }) =>
         } else return ''
     }
 
-    const handleClick = (e) => {
+    // const handleClick = (e) => {
+    //     toggleNote(rowIndex, noteIndex)
+    //     console.log(note)
+    // }
+
+    const handleMouseDown = (e) => {
         toggleNote(rowIndex, noteIndex)
         console.log(note)
     }
@@ -33,13 +38,12 @@ const Cell = ({ note, noteIndex, rowIndex, toggleNote, position, mouseDown }) =>
     const handleMouseOver = (e) => {
         if (e.target.className.includes('percussion') && mouseDown) {
             toggleNote(rowIndex, noteIndex)
-            console.log(note)
         }
     }
 
     return (
         <>
-            <button className={`cell ${note.category} hover` + ' ' + getBackground() + ' ' + getDownbeat()} name={note.note} onClick={handleClick} onMouseOver={handleMouseOver}>{' '}</button>
+            <button className={`cell ${note.category} hover` + ' ' + getBackground() + ' ' + getDownbeat()} name={note.note} onMouseOver={handleMouseOver} onMouseDown={handleMouseDown} >{' '}</button>
         </>
     )
 }

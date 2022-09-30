@@ -1,4 +1,4 @@
-const SimplePercussionCell = ({ note, noteIndex, position, sequenceIndex }) => {
+const SimplePercussionCell = ({ note, rowIndex, position, sequenceIndex, mouseDown, toggleNote }) => {
     const getBackground = () => {
         let noteOn = note.isActive
         let barHover = sequenceIndex === (position + 32 - 3) % 32
@@ -15,9 +15,20 @@ const SimplePercussionCell = ({ note, noteIndex, position, sequenceIndex }) => {
                 return 'waiting'
         }
     }
+
+    const handleMouseDown = (e) => {
+        toggleNote(rowIndex, sequenceIndex)
+        console.log(note)
+    }
+
+    const handleMouseOver = (e) => {
+        if (mouseDown) {
+            toggleNote(rowIndex, sequenceIndex)
+        }
+    }
     return (
         <div className='cell-holder'>
-            <button className={'simple-percussion-cell hover' + ' ' + getBackground()}>{' '}</button>
+            <button className={`simple-percussion-cell ${note.category} hover` + ' ' + getBackground()} onMouseDown={handleMouseDown} onMouseOver={handleMouseOver}>{' '}</button>
         </div>
 
     )

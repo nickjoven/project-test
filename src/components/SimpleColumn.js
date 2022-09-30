@@ -15,13 +15,13 @@ const splitColumn = (column) => {
     return splitArray
 }
 
-const SimpleColumn = ({ column, columnIndex, position, applyPitchPattern }) => {
+const SimpleColumn = ({ column, columnIndex, position, applyPitchPattern, mouseDown, toggleNote }) => {
 
     return (
         <div className={`column-${columnIndex+1}`}>
             {/* <button onClick={check}>{columnIndex}</button> */}
             <SimplePitchContainer pitchColumn={splitColumn(column)[0]} position={position} columnIndex={columnIndex} applyPitchPattern={applyPitchPattern} />
-            <SimplePercussionContainer percussionColumn={splitColumn(column)[1]} position={position} columnIndex={columnIndex} />
+            <SimplePercussionContainer percussionColumn={splitColumn(column)[1]} position={position} columnIndex={columnIndex} mouseDown={mouseDown} toggleNote={toggleNote} />
         </div>
     )
 }

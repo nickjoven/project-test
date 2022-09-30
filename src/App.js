@@ -18,8 +18,8 @@ const sampler = new Tone.Sampler({
   'C4': '/cw_sound39.wav'
 }).toDestination();
 
-const play = (e) => {
-  sampler.triggerAttackRelease(e.target.name)
+const play = (sampler = sampler, note, time) => {
+  sampler.triggerAttackRelease(note.note, '16n', time )
 }
 
 
@@ -99,7 +99,7 @@ const App = () => {
         sequence.forEach((row) => {
           let note = row[step]
           if (note.isActive) {
-            sampler.triggerAttackRelease(note.note, '16n', time)
+            play(sampler, note, time)
           }
         })
         step = (step + 1) % 32
@@ -200,7 +200,7 @@ const App = () => {
 
   return (
     <div className='App' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-      <SimpleEditor sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} />
+      <SimpleEditor sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
       <button onClick={clearSequence}>Clear</button>
       <Inputs bpm={bpm} handleBpmChange={handleBpmChange} />
       <button onClick={start}>Play</button>

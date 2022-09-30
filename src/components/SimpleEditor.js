@@ -1,6 +1,6 @@
 import SimpleColumn from './SimpleColumn'
 
-const SimpleEditor = ({ sequence, position, applyPitchPattern }) => {
+const SimpleEditor = ({ sequence, position, applyPitchPattern, mouseDown, toggleNote }) => {
 
     const getBeat = (row, currentIndex) => {
         let beat = []
@@ -29,7 +29,7 @@ const SimpleEditor = ({ sequence, position, applyPitchPattern }) => {
                 <div className='column-container'>
                 {sequence.length > 0 ? getBeatColumns().map((column, columnIndex) => {
                     return (
-                        <SimpleColumn key={columnIndex} columnIndex={columnIndex} column={column} position={position} applyPitchPattern={applyPitchPattern} />
+                        <SimpleColumn key={columnIndex} columnIndex={columnIndex} column={column} position={position} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
                         )
                     }): <></> }
                 </div>
