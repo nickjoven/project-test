@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import SimpleColumn from './SimpleColumn'
+import PitchSelector from './PitchSelector'
 
 const SimpleEditor = ({ sequence, position, applyPitchPattern, mouseDown, toggleNote }) => {
+    const [root, setRoot] = useState(0)
+    const [offset, setOffset] = useState(0)
 
     const getBeat = (row, currentIndex) => {
         let beat = []
@@ -25,11 +29,24 @@ const SimpleEditor = ({ sequence, position, applyPitchPattern, mouseDown, toggle
 
     return (
         <div className='simple-editor-view'>
+            <div className='menu-objects'>
+            <PitchSelector root={root} setRoot={setRoot} setOffset={setOffset} />
+            </div>
             <div className='centered-content'>
                 <div className='column-container'>
                 {sequence.length > 0 ? getBeatColumns().map((column, columnIndex) => {
                     return (
-                        <SimpleColumn key={columnIndex} columnIndex={columnIndex} column={column} position={position} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
+                        <SimpleColumn 
+                            key={columnIndex} 
+                            columnIndex={columnIndex} 
+                            column={column} 
+                            position={position} 
+                            applyPitchPattern={applyPitchPattern} 
+                            mouseDown={mouseDown} 
+                            toggleNote={toggleNote}
+                            root={root}
+                            offset={offset}
+                        />
                         )
                     }): <></> }
                 </div>

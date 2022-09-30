@@ -89,12 +89,22 @@ body {
 }
 
 .column-container {
-  width: 1200px;
-  height: 200px;
+  width: 1600px;
+  height: 300px;
   display: flex;
   padding-top: 10%;
   justify-content: center;
   align-items: flex-end;
+}
+
+.simple-editor-view {
+  margin-top: 15%;
+}
+
+.menu-objects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .simple-pitch-container {
@@ -102,6 +112,8 @@ body {
   justify-content: center;
   align-items: flex-end;
 }
+
+
 
 .simple-percussion-container {
   height: 40%;

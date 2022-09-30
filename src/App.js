@@ -170,13 +170,13 @@ const App = () => {
         if (index >= startIndex && index < startIndex + 4 && note.category === 'pitch') {
           // Math.floor(Math.random() * 10 + 1)
           switch (true) {
-            case (rowIndex === (pattern[0] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+            case (rowIndex === (pattern[0] - offset) && Math.floor(Math.random() * 10 + 1) > 5):
               note.isActive = true
-            case (rowIndex === (pattern[1] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+            case (rowIndex === (pattern[1] - offset) && Math.floor(Math.random() * 10 + 1) > 5):
               note.isActive = true
-            case (rowIndex === (pattern[2] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+            case (rowIndex === (pattern[2] - offset) && Math.floor(Math.random() * 10 + 1) > 5):
               note.isActive = true
-            case (rowIndex === (pattern[3] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+            case (rowIndex === (pattern[3] - offset) && Math.floor(Math.random() * 10 + 1) > 5):
               note.isActive = true
             default:
               return
