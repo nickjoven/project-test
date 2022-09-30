@@ -70,6 +70,7 @@ let step = 0
 
 const App = () => {
   const [mouseDown, setMouseDown] = useState(false)
+  const [detailView, setDetailView] = useState(false)
   const [bpm, setBpm] = useState(120)
   const [sequence, setSequence] = useState(makeGrid(noteMap))
   const [started, setStarted] = useState(false)
@@ -197,6 +198,10 @@ const App = () => {
     }
   }
 
+  const showDetail = () => {
+    setDetailView(prev => !detailView)
+  }
+
 
   return (
     <div className='App' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
@@ -205,6 +210,9 @@ const App = () => {
       <Inputs bpm={bpm} handleBpmChange={handleBpmChange} />
       <button onClick={start}>Play</button>
       <button onClick={logSequence}>Sequence</button>
+      <button onClick={showDetail}>Detail</button>
+      { detailView 
+      ?
       <div className='centered-content'>
         <div className='row-container'>
           <div className='piano-roll'>
@@ -225,6 +233,9 @@ const App = () => {
             </div>
           </div>
       </div>
+      : 
+      <></>
+      }
     </div>
   );
 }
