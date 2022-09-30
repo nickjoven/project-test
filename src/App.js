@@ -69,6 +69,7 @@ const makeRow = (note, rows) => {
 let step = 0
 
 const App = () => {
+  const [mouseDown, setMouseDown] = useState(false)
   const [bpm, setBpm] = useState(120)
   const [sequence, setSequence] = useState(makeGrid(noteMap))
   const [started, setStarted] = useState(false)
@@ -174,7 +175,7 @@ const App = () => {
               note.isActive = true
             case (rowIndex === (pattern[2] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
               note.isActive = true
-            case (rowIndex === (pattern[0] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
+            case (rowIndex === (pattern[3] + offset) && Math.floor(Math.random() * 10 + 1) > 5):
               note.isActive = true
             default:
               return
@@ -184,13 +185,22 @@ const App = () => {
     })
   }
   
-  
+  const handleMouseDown = () => {
+    if (!mouseDown) {
+      setMouseDown(prev => !mouseDown)
+    }
+  }
+
+  const handleMouseUp = () => {
+    if (mouseDown) {
+      setMouseDown(prev => !mouseDown)
+    }
+  }
 
 
   return (
-    <div className='App'>
+    <div className='App' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       <SimpleEditor sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} />
-      <h1>Detailed UI</h1>
       <button onClick={clearSequence}>Clear</button>
       <Inputs bpm={bpm} handleBpmChange={handleBpmChange} />
       <button onClick={start}>Play</button>
@@ -209,7 +219,7 @@ const App = () => {
           <div className='grid-container'>
             {sequence.map((row, rowIndex) => {
               return (
-                <Row key={rowIndex} rowIndex={rowIndex} row={row} play={play} toggleNote={toggleNote} position={position}/>
+                <Row key={rowIndex} rowIndex={rowIndex} row={row} play={play} toggleNote={toggleNote} position={position} mouseDown={mouseDown} />
                 )
               })}
             </div>
