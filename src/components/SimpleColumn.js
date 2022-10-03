@@ -20,7 +20,7 @@ const splitColumn = (column) => {
     let splitArray = []
     let pitches = []
     let drums = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 12; i++) {
         drums.push(column[i + 49])
     }
     for (let i = 0; i < 49; i++) {

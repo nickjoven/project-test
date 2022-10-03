@@ -10,10 +10,17 @@ const BeatsPerSequence = 8
 const stepsPerSequence = stepsPerBeat * BeatsPerSequence
 
 const sampler = new Tone.Sampler({
-  'C1': '/kick.wav',
-  'E1': '/snare.wav',
-  'G1': '/ophh.wav',
-  'B1': '/clhh.wav',
+  'A0': '/kick.wav',
+  'A#0': '/snare.wav',
+  'B0': '/ophh.wav',
+  'C1': '/clhh.wav',
+  'C#1': '/ChipShop_GB_Perc_17.wav',
+  'D1': '/ChipShop_GB_Perc_16.wav',
+  'D#1': '/ChipShop_GB_Perc_15.wav',
+  'E1': '/S_000_066.wav',
+  'F1': '/S_000_062.wav',
+  'F#1': '/S_000_058.wav',
+  'B1': '/ChipShop_GB_Perc_10.wav',
   'C2': '/cw_sound31.wav',
   'C4': '/cw_sound39.wav'
 }).toDestination();
@@ -22,13 +29,20 @@ const play = (sampler = sampler, note, time) => {
   sampler.triggerAttackRelease(note.note, '16n', time )
 }
 
-
 const getNoteMap = (lowestMidi) => {
   let noteMap = [
+    { note: 'A0', midi: 21, category: 'percussion' },
+    { note: 'A#0', midi: 22, category: 'percussion' },
+    { note: 'B0', midi: 23, category: 'percussion' },
     { note: 'C1', midi: 24, category: 'percussion' },
-    { note: 'E1', midi: 28, category: 'percussion' },
-    { note: 'G1', midi: 31, category: 'percussion' },
-    { note: 'B1', midi: 35, category: 'percussion' },
+    { note: 'C#1', midi: 25, category: 'sample' },
+    { note: 'D1', midi: 26, category: 'sample' },
+    { note: 'D#1', midi: 27, category: 'sample' },
+    { note: 'E1', midi: 28, category: 'sample' },
+    { note: 'F1', midi: 29, category: 'sample' },
+    { note: 'F#1', midi: 30, category: 'sample' },
+    { note: 'A1', midi: 33, category: 'sample' },
+    { note: 'B1', midi: 35, category: 'sample' },
   ]
   for (let i = lowestMidi; i < lowestMidi + 49; i++) {
     let note = {}

@@ -108,7 +108,7 @@ body {
 }
 
 .simple-pitch-container {
-  height: 60%;
+  height: 33%;
   justify-content: center;
   align-items: flex-end;
 }
@@ -131,7 +131,7 @@ body {
 }
 
 .simple-percussion-container {
-  height: 40%;
+  height: 67%;
 }
 
 .column-1 {
@@ -183,7 +183,7 @@ body {
 }
 
 .simple-percussion-row {
-  height: 25%;
+  height: 8.34%;
   display: flex;
 }
 
