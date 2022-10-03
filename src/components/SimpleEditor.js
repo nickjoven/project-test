@@ -3,8 +3,6 @@ import SimpleColumn from './SimpleColumn'
 import PitchSelector from './PitchSelector'
 
 const SimpleEditor = ({ sequence, position, applyPitchPattern, mouseDown, toggleNote }) => {
-    const [root, setRoot] = useState(0)
-    const [offset, setOffset] = useState(0)
 
     const getBeat = (row, currentIndex) => {
         let beat = []
@@ -30,7 +28,6 @@ const SimpleEditor = ({ sequence, position, applyPitchPattern, mouseDown, toggle
     return (
         <div className='simple-editor-view'>
             <div className='menu-objects'>
-            <PitchSelector root={root} setRoot={setRoot} setOffset={setOffset} />
             </div>
             <div className='centered-content'>
                 <div className='column-container'>
@@ -44,8 +41,6 @@ const SimpleEditor = ({ sequence, position, applyPitchPattern, mouseDown, toggle
                             applyPitchPattern={applyPitchPattern} 
                             mouseDown={mouseDown} 
                             toggleNote={toggleNote}
-                            root={root}
-                            offset={offset}
                         />
                         )
                     }): <></> }

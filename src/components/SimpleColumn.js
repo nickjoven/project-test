@@ -1,5 +1,20 @@
+import { useState, useEffect } from 'react'
 import SimplePitchContainer from './SimplePitchContainer'
 import SimplePercussionContainer from './SimplePercussionContainer'
+
+// const roots = ["I", "ii", "iii", "IV", "V", "vi", "vii°"]
+// const keys = ["C", "G", "D", "A", "E", "B", "F♯", "D♭", "A♭", "E♭", "B♭", "F"]
+const transpositions = [0, 5, -2, 3, -4, 1, -6, -1, 4, -3, 2, -7]
+
+// const getKeys = () => {
+//     let keyArray = []
+//     for (let i = 0; i < keys.length; i++) {
+//         let keyObj = {}
+//         keyObj.key = keys[i]
+//         keyObj.transposition = transpositions[i]
+//         keyArray.push(keyObj)
+//     }
+// } 
 
 const splitColumn = (column) => {
     let splitArray = []
@@ -15,18 +30,30 @@ const splitColumn = (column) => {
     return splitArray
 }
 
-const SimpleColumn = ({ column, columnIndex, position, applyPitchPattern, mouseDown, toggleNote, root, offset }) => {
+const SimpleColumn = ({ column, columnIndex, position, applyPitchPattern, mouseDown, toggleNote }) => {
+    const [root, setRoot] = useState(0)
+    const [offset, setOffset] = useState(0)
+    const [transposition, setTransposition] = useState(0)
+
+    useEffect(() => {
+        const getOffset = () => {
+            setOffset(transpositions[transposition])
+        }
+        getOffset()
+    }, [transposition])
 
     return (
         <div className={`column-${columnIndex+1}`}>
-            {/* <button onClick={check}>{columnIndex}</button> */}
             <SimplePitchContainer 
                 pitchColumn={splitColumn(column)[0]} 
                 position={position} 
                 columnIndex={columnIndex} 
                 applyPitchPattern={applyPitchPattern}
                 root={root}
-                offset={offset} 
+                setRoot={setRoot}
+                offset={offset}
+                transposition={transposition}
+                setTransposition={setTransposition}
             />
             <SimplePercussionContainer 
                 percussionColumn={splitColumn(column)[1]} 

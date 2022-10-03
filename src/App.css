@@ -113,7 +113,22 @@ body {
   align-items: flex-end;
 }
 
+.pitch-menu {
+  
+}
 
+.pitch-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.pitch-button {
+  width: 12.5%;
+  height: 20px;
+  border: 0px;
+  text-align: center;
+  font-size: 8px;
+}
 
 .simple-percussion-container {
   height: 40%;

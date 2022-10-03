@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import PitchMenu from './PitchMenu'
 import SimplePitchRow from "./SimplePitchRow"
 
 const patterns = [
@@ -42,27 +43,23 @@ const patterns = [
     ],
 ]
 
-const SimplePitchContainer = ({ root, pitchColumn, position, columnIndex, applyPitchPattern, offset }) => {
-    const [pattern, setPattern] = useState(0)
+const SimplePitchContainer = ({ pitchColumn, position, columnIndex, applyPitchPattern, root, setRoot, offset, transposition, setTransposition }) => {
 
+    useEffect(() => {
+        shufflePattern()
+    }, [root, offset])
 
-
-    const handleClick = () => {
-        if (pattern > patterns[root].length) {
-            setPattern(0)
-        }
-        applyPitchPattern(patterns[root][pattern], columnIndex * 4, offset)
-        setPattern(prev => (pattern + 1) % patterns[root].length )
+    const shufflePattern = () => {
+        let randIndex = Math.floor(Math.random() * patterns[root].length)
+        applyPitchPattern(patterns[root][randIndex], columnIndex * 4, offset)
     }
 
-
-
     return (
-        <div onClick={handleClick} className='simple-pitch-container'>
-            {pattern}
+        <div  className='simple-pitch-container'>
+            <PitchMenu root={root} setRoot={setRoot} shufflePattern={shufflePattern} transposition={transposition} setTransposition={setTransposition} />
             {pitchColumn.map((row, rowIndex) => {
                 return (
-                    <SimplePitchRow root={root} key={rowIndex} row={row} rowIndex={rowIndex} position={position} columnIndex={columnIndex} />
+                    <SimplePitchRow root={root} key={rowIndex} row={row} rowIndex={rowIndex} position={position} columnIndex={columnIndex} shufflePattern={shufflePattern} />
                 )     
             })}
         </div>
