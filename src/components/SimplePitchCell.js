@@ -1,4 +1,19 @@
+import { useState, useEffect } from 'react'
+
 const SimplePitchCell = ({ note, noteIndex, position, sequenceIndex }) => {
+    const [myPixel, setMyPixel] = useState(1)
+
+    useEffect(() => {
+        const getBackground = () => {
+            setMyPixel(getNumber())
+        }
+        getBackground()
+    }, [])
+
+    const getNumber = () => {
+        return (Math.floor(Math.random() * 4) + 1)
+    }
+
     const getBackground = () => {
         let noteOn = note.isActive
         let barHover = sequenceIndex === (position + 32 - 3) % 32
@@ -6,13 +21,11 @@ const SimplePitchCell = ({ note, noteIndex, position, sequenceIndex }) => {
             case noteOn && barHover:
                 return 'on-barHover'
             case noteOn && !barHover:
-                return 'on'
+                return 'on-pitch'
             case !noteOn && barHover:
-                return 'barHover'
-            case note.note.includes('#'):
-                return 'waiting-accidental'
+                return `barHover-simple`
             default:
-                return 'waiting'
+                return `waiting-simple-${myPixel}`
         }
     }
     return (

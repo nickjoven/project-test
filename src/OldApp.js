@@ -9,7 +9,7 @@ const sampler = new Tone.Sampler({
     'C4': '/cw_sound39.wav'
 }).toDestination();
 
-console.log(sampler)
+// console.log(sampler)
 
 const playSample = (e) => {
     sampler.triggerAttackRelease(e.target.name)

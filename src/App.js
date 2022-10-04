@@ -130,11 +130,6 @@ const App = () => {
   }, [started])
   
 
-  const logSequence = () => {
-    console.log(sequence)
-    console.log(position)
-  }
-
   const toggleNote = (rowIndex, noteIndex) => {
     let sequenceCopy = [...sequence]
     sequenceCopy[rowIndex][noteIndex].isActive = !sequenceCopy[rowIndex][noteIndex].isActive
@@ -218,12 +213,15 @@ const App = () => {
 
   return (
     <div className='App' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-      <SimpleEditor sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
-      <button onClick={clearSequence}>Clear</button>
+      <SimpleEditor started={started} sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
+      <div className='inputs-container'>
+      <div className='clear-button-holder'>
+        <button onClick={clearSequence}>Clear</button>
+      </div>
       <Inputs mouseDown={mouseDown} bpm={bpm} handleBpmChange={handleBpmChange} />
       <button onClick={start}>Play</button>
-      <button onClick={logSequence}>Sequence</button>
       <button onClick={showDetail}>Detail</button>
+      </div>
       { detailView 
       ?
       <div className='centered-content'>

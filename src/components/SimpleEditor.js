@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import SimpleColumn from './SimpleColumn'
-import PitchSelector from './PitchSelector'
 
-const SimpleEditor = ({ sequence, position, applyPitchPattern, mouseDown, toggleNote }) => {
+const SimpleEditor = ({ started, sequence, position, applyPitchPattern, mouseDown, toggleNote }) => {
 
     const getBeat = (row, currentIndex) => {
         let beat = []
@@ -35,6 +34,7 @@ const SimpleEditor = ({ sequence, position, applyPitchPattern, mouseDown, toggle
                     return (
                         <SimpleColumn 
                             key={columnIndex} 
+                            started={started}
                             columnIndex={columnIndex} 
                             column={column} 
                             position={position} 

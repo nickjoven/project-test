@@ -5,6 +5,8 @@ import SimplePercussionContainer from './SimplePercussionContainer'
 // const roots = ["I", "ii", "iii", "IV", "V", "vi", "vii°"]
 // const keys = ["C", "G", "D", "A", "E", "B", "F♯", "D♭", "A♭", "E♭", "B♭", "F"]
 const transpositions = [0, 5, -2, 3, -4, 1, -6, -1, 4, -3, 2, -7]
+const rootColors = [
+]
 
 // const getKeys = () => {
 //     let keyArray = []
@@ -30,10 +32,28 @@ const splitColumn = (column) => {
     return splitArray
 }
 
-const SimpleColumn = ({ column, columnIndex, position, applyPitchPattern, mouseDown, toggleNote }) => {
+const SimpleColumn = ({ started, column, columnIndex, position, applyPitchPattern, mouseDown, toggleNote }) => {
     const [root, setRoot] = useState(0)
     const [offset, setOffset] = useState(0)
     const [transposition, setTransposition] = useState(0)
+    const [stretching, setStretching] = useState('')
+
+    const getColor = () => {
+
+    }
+
+    useEffect(() => {
+        if (!started) {
+            return
+        } else {
+            const determineStretch = () => {
+                setStretching('stretching')
+            }
+            if (columnIndex == Math.floor(position / 4)) {
+                determineStretch()
+            }
+        }
+    }, [position])
 
     useEffect(() => {
         const getOffset = () => {
@@ -43,7 +63,7 @@ const SimpleColumn = ({ column, columnIndex, position, applyPitchPattern, mouseD
     }, [transposition])
 
     return (
-        <div className={`column-${columnIndex+1}`}>
+        <div className={`column ${stretching}`}>
             <SimplePitchContainer 
                 pitchColumn={splitColumn(column)[0]} 
                 position={position} 

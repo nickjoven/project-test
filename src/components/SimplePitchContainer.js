@@ -69,11 +69,13 @@ const SimplePitchContainer = ({ pitchColumn, position, columnIndex, applyPitchPa
     return (
         <div  className='simple-pitch-container'>
             <PitchMenu root={root} setRoot={setRoot} shufflePattern={shufflePattern} transposition={transposition} setTransposition={setTransposition} toggleLoad={toggleLoad} />
-            {pitchColumn.map((row, rowIndex) => {
-                return (
-                    <SimplePitchRow root={root} key={rowIndex} row={row} rowIndex={rowIndex} position={position} columnIndex={columnIndex} shufflePattern={shufflePattern} />
-                )     
-            })}
+            <div className='simple-pitch-row-container'>
+                {pitchColumn.map((row, rowIndex) => {
+                    return (
+                        <SimplePitchRow root={root} key={rowIndex} row={row} rowIndex={rowIndex} position={position} columnIndex={columnIndex} shufflePattern={shufflePattern} />
+                        )     
+                    })}
+            </div>
         </div>
     )
 }

@@ -17,7 +17,8 @@ const PitchMenu = ({ root, setRoot, shufflePattern, transposition, setTransposit
     }
 
     const handleClickKey = (e) => {
-        if (e.shiftKey) {
+        if (e.shiftKey || e.type === 'contextmenu') {
+            e.preventDefault()
             setTransposition(prev => (transposition - 1) % transpositions.length)
         }
         else {
@@ -28,7 +29,7 @@ const PitchMenu = ({ root, setRoot, shufflePattern, transposition, setTransposit
     return (
         <div className='pitch-menu'>
             <div className='pitch-buttons'>
-                <button className='pitch-button hover' onClick={handleClickKey}>{keys.at(transposition)}</button>
+                <button className='pitch-button hover' onContextMenu={handleClickKey} onClick={handleClickKey}>{keys.at(transposition)}</button>
                 {roots.map((root) => {
                     return (
                         <button className='pitch-button hover' onClick={handleClickRoot} name={root} key={root}>{root}</button>
