@@ -21,8 +21,9 @@ const sampler = new Tone.Sampler({
   'F1': '/S_000_062.wav',
   'F#1': '/S_000_058.wav',
   'B1': '/ChipShop_GB_Perc_10.wav',
-  'C2': '/cw_sound31.wav',
-  'C4': '/cw_sound39.wav'
+  'C#2': '/ChipShop_GB_Bass_Csharp_02.wav',
+  'E4': '/ChipShop_GB_Lead_E_07.wav',
+  'G#5': '/ChipShop_GB_Lead_Gsharp_09.wav',
 }).toDestination();
 
 const play = (sampler = sampler, note, time) => {
@@ -94,7 +95,7 @@ const App = () => {
   const start = () => {
     if (!started) {
       Tone.start()
-      Tone.getDestination().volume.rampTo(-10, 0.001)
+      Tone.getDestination().volume.rampTo(-10, 0.05)
       Tone.Transport.bpm.value = bpm 
       setStarted(true)
     }
