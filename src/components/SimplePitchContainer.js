@@ -47,6 +47,12 @@ const SimplePitchContainer = ({ pitchColumn, position, columnIndex, applyPitchPa
 
     const [firstLoad, setFirstLoad] = useState(true)
 
+    const toggleLoad = () => {
+        if (firstLoad) {
+            setFirstLoad(false)
+        }
+    }
+
     useEffect(() => {
         if (firstLoad) {
             return
@@ -62,7 +68,7 @@ const SimplePitchContainer = ({ pitchColumn, position, columnIndex, applyPitchPa
 
     return (
         <div  className='simple-pitch-container'>
-            <PitchMenu root={root} setRoot={setRoot} shufflePattern={shufflePattern} transposition={transposition} setTransposition={setTransposition} />
+            <PitchMenu root={root} setRoot={setRoot} shufflePattern={shufflePattern} transposition={transposition} setTransposition={setTransposition} toggleLoad={toggleLoad} />
             {pitchColumn.map((row, rowIndex) => {
                 return (
                     <SimplePitchRow root={root} key={rowIndex} row={row} rowIndex={rowIndex} position={position} columnIndex={columnIndex} shufflePattern={shufflePattern} />

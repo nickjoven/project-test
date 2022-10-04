@@ -5,9 +5,10 @@ const keys = ["C", "G", "D", "A", "E", "B", "F♯", "D♭", "A♭", "E♭", "B�
 const transpositions = [0, 5, -2, 3, -4, 1, -6, -1, 4, -3, 2, -7]
 
 
-const PitchMenu = ({ root, setRoot, shufflePattern, transposition, setTransposition }) => {
+const PitchMenu = ({ root, setRoot, shufflePattern, transposition, setTransposition, toggleLoad }) => {
 
     const handleClickRoot = (e) => {
+        toggleLoad()
         if (root === roots.map(root => root).indexOf(e.target.name)) {
             shufflePattern()
         } else {
