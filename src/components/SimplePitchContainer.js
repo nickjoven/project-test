@@ -45,8 +45,14 @@ const patterns = [
 
 const SimplePitchContainer = ({ pitchColumn, position, columnIndex, applyPitchPattern, root, setRoot, offset, transposition, setTransposition }) => {
 
+    const [firstLoad, setFirstLoad] = useState(true)
+
     useEffect(() => {
-        shufflePattern()
+        if (firstLoad) {
+            return
+        } else {
+            shufflePattern()
+        }
     }, [root, offset])
 
     const shufflePattern = () => {

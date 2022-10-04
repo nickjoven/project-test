@@ -142,9 +142,8 @@ const App = () => {
 
   const handleBpmChange = (e) => {
     switch (true) {
-
-      case (e.target.value > 240):
-        setBpm(240)
+      case (e.target.value > 180):
+        setBpm(180)
       case (e.target.value < 40):
         setBpm(40)
       default:
@@ -220,7 +219,7 @@ const App = () => {
     <div className='App' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       <SimpleEditor sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
       <button onClick={clearSequence}>Clear</button>
-      <Inputs bpm={bpm} handleBpmChange={handleBpmChange} />
+      <Inputs mouseDown={mouseDown} bpm={bpm} handleBpmChange={handleBpmChange} />
       <button onClick={start}>Play</button>
       <button onClick={logSequence}>Sequence</button>
       <button onClick={showDetail}>Detail</button>
