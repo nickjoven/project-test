@@ -58,8 +58,6 @@ const getNoteMap = (lowestMidi) => {
 
 const noteMap = getNoteMap(36)
 
-// console.log('fn', getNoteMap(36))
-
 const makeGrid = (noteArray) => {
   let rows = []
   noteArray.forEach((note) => {
@@ -85,7 +83,6 @@ const makeRow = (note, rows) => {
 let step = 0
 
 const App = () => {
-  const [mouseDown, setMouseDown] = useState(false)
   const [detailView, setDetailView] = useState(false)
   const [bpm, setBpm] = useState(120)
   const [sequence, setSequence] = useState(makeGrid(noteMap))
@@ -195,31 +192,19 @@ const App = () => {
     })
   }
   
-  const handleMouseDown = () => {
-    if (!mouseDown) {
-      setMouseDown(prev => !mouseDown)
-    }
-  }
-
-  const handleMouseUp = () => {
-    if (mouseDown) {
-      setMouseDown(prev => !mouseDown)
-    }
-  }
-
   const showDetail = () => {
     setDetailView(prev => !detailView)
   }
 
 
   return (
-    <div className='App' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-      <SimpleEditor detailView={detailView} started={started} playing={playing} sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
+    <div className='App' >
+      <SimpleEditor detailView={detailView} started={started} playing={playing} sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} toggleNote={toggleNote} />
       <div className='inputs-container'>
         <div className='clear-button-holder'>
           <button className='ui-button' onClick={clearSequence}>Clear</button>
         </div>
-        <Inputs mouseDown={mouseDown} bpm={bpm} handleBpmChange={handleBpmChange} />
+        <Inputs bpm={bpm} handleBpmChange={handleBpmChange} />
         <UiButtons start={start} playing={playing} showDetail={showDetail} />
       </div>
       { detailView 
@@ -238,7 +223,7 @@ const App = () => {
           <div className='grid-container'>
             {sequence.map((row, rowIndex) => {
               return (
-                <Row key={rowIndex} rowIndex={rowIndex} row={row} play={play} toggleNote={toggleNote} position={position} mouseDown={mouseDown} />
+                <Row key={rowIndex} rowIndex={rowIndex} row={row} play={play} toggleNote={toggleNote} position={position} />
                 )
               })}
             </div>

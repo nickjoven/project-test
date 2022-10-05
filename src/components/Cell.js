@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Cell = ({ note, noteIndex, rowIndex, toggleNote, position, mouseDown }) => {
+const Cell = ({ note, noteIndex, rowIndex, toggleNote, position }) => {
 
     const getBackground = () => {
         let noteOn = note.isActive
@@ -19,31 +19,13 @@ const Cell = ({ note, noteIndex, rowIndex, toggleNote, position, mouseDown }) =>
         }
     }
 
-    const getDownbeat = () => {
-        if ((noteIndex + 32) % 4 === 0) {
-            return 'downbeat'
-        } else return ''
-    }
-
-    // const handleClick = (e) => {
-    //     toggleNote(rowIndex, noteIndex)
-    //     console.log(note)
-    // }
-
     const handleMouseDown = (e) => {
         toggleNote(rowIndex, noteIndex)
-        console.log(note)
-    }
-
-    const handleMouseOver = (e) => {
-        if (e.target.className.includes('percussion') && mouseDown) {
-            toggleNote(rowIndex, noteIndex)
-        }
     }
 
     return (
         <>
-            <button className={`cell ${note.category} hover` + ' ' + getBackground() + ' ' + getDownbeat()} name={note.note} onMouseOver={handleMouseOver} onMouseDown={handleMouseDown} >{note.note.slice(0, -1)}</button>
+            <button className={`cell ${note.category} hover` + ' ' + getBackground() + ' '} name={note.note} onMouseDown={handleMouseDown} >{note.note.slice(0, -1)}</button>
         </>
     )
 }

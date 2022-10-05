@@ -1,11 +1,20 @@
 html {
-  overflow: scroll;
   overflow-x: hidden;
 }
 
-body {
-  background-image: url('https://art.pixilart.com/a13eea0ef7b0e3e.gif');
-  background-attachment: fixed;
+
+body:before {
+    content: ' ';
+    position: fixed; 
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url('https://art.pixilart.com/a13eea0ef7b0e3e.gif') no-repeat center center;
+    background-position: 0;
+    background-size: cover;
+    will-change: transform;
+    z-index: -1;
 }
 
 ::-webkit-scrollbar {
@@ -41,22 +50,21 @@ button {
 .row-container {
   display: flex;
   justify-content: center;
-  /* margin: 0px 10%; */
   padding-top: 4%;
-  background-color: #3232329d;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #00000047);
   width: 100%;
 }
 .row {
   width: auto;
   display: flex;
   justify-content: space-evenly;
+  background-color: #323232fe;
 }
 
 .cell {
   width: 32px;
   height: 20px;
   border: 0px;
-  margin: 2px;
   font-size: 0px;
 }
 
@@ -105,7 +113,7 @@ button {
 }
 
 .on-percussion {
-  background-color: #453f11;
+  background-color: #453f11a4;
 }
 
 .barHover {
@@ -113,7 +121,7 @@ button {
 }
 
 .barHover-simple {
-  background-color: #a6ee80;
+  background-color: #e3ee80;
 }
 
 .waiting {
@@ -144,7 +152,7 @@ button {
 .roll-note {
   width: 72px;
   height: 20px;
-  border: 2px solid black;
+  background-color: #f9f9f9;
 }
 
 .accidental {
@@ -163,18 +171,18 @@ button {
 }
 
 .stretching {
-  animation: stretch 5500ms infinite;
+  animation: stretch 4000ms infinite;
 }
 
 .unstretch {
-  animation: stretch 5500ms;
+  animation: stretch 4000ms;
 }
 
 
 @keyframes stretch {
   50% {
-    height: 68%;
-    margin-bottom: .5%;
+    height: 64%;
+    margin-bottom: 2%;
   }
 }
 
@@ -198,7 +206,6 @@ button {
   height: 100%;
   display: flex;
   justify-content: space-evenly;
-  outline: 3px solid #4e4724;
 }
 
 .pitch-button {
@@ -222,18 +229,19 @@ button {
 }
 
 .simple-pitch-row-container {
-  height: 70%;
+  height: 68%;
 }
 
 .simple-percussion-container {
-  height: 67%;
+  height: 180px;
   margin-top: 2px;
 }
 
 .column {
   width: 10%;
-  height: 60%;
-  outline: 4px solid #4e4724;
+  height: 63%;
+  z-index: 0;
+  outline: 8px solid #6c7b3f;
   background-color: #a2b75e;
   overflow: hidden;
 }
@@ -244,7 +252,7 @@ button {
 }
 
 .simple-percussion-row {
-  height: 8.34%;
+  height: 14.5px;
   display: flex;
 }
 

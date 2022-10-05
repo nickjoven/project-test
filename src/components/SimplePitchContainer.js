@@ -67,7 +67,7 @@ const SimplePitchContainer = ({ pitchColumn, position, columnIndex, applyPitchPa
     }
 
     return (
-        <div  className='simple-pitch-container'>
+        <div className='simple-pitch-container' onClick={shufflePattern}>
             <PitchMenu root={root} setRoot={setRoot} shufflePattern={shufflePattern} transposition={transposition} setTransposition={setTransposition} toggleLoad={toggleLoad} />
             <div className='simple-pitch-row-container'>
                 {pitchColumn.map((row, rowIndex) => {

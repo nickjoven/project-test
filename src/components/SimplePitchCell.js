@@ -30,7 +30,7 @@ const SimplePitchCell = ({ note, noteIndex, position, sequenceIndex }) => {
     }
     return (
         <div className='cell-holder'>
-            <button className={'simple-pitch-cell hover' + ' ' + getBackground()}>{' '}</button>
+            <div className={'simple-pitch-cell hover' + ' ' + getBackground()}>{' '}</div>
         </div>
 
     )

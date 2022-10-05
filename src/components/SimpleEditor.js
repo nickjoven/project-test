@@ -1,7 +1,20 @@
 import { useState } from 'react'
 import SimpleColumn from './SimpleColumn'
 
-const SimpleEditor = ({ detailView, started, playing, sequence, position, applyPitchPattern, mouseDown, toggleNote }) => {
+const SimpleEditor = ({ detailView, started, playing, sequence, position, applyPitchPattern, toggleNote }) => {
+    const [mouseDown, setMouseDown] = useState(false)
+
+    const handleMouseDown = () => {
+        if (!mouseDown) {
+            setMouseDown(prev => !mouseDown)
+        }
+    }
+
+    const handleMouseUp = () => {
+        if (mouseDown) {
+            setMouseDown(prev => !mouseDown)
+        }
+    }
 
     const getBeat = (row, currentIndex) => {
         let beat = []
@@ -25,7 +38,7 @@ const SimpleEditor = ({ detailView, started, playing, sequence, position, applyP
     }
 
     return (
-        <div className={detailView? 'margin' : 'simple-editor-view'}>
+        <div className={detailView? 'margin' : 'simple-editor-view'} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
             <div className='centered-content'>
                 <div className='column-container'>
                 {sequence.length > 0 ? getBeatColumns().map((column, columnIndex) => {
