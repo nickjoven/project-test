@@ -57,7 +57,7 @@ const SimpleColumn = ({ started, playing, column, columnIndex, position, applyPi
     }, [transposition])
 
     return (
-        <div className={`column ${stretching ? 'stretching' : ''}`}>
+        <div className={`column ${stretching && started ? 'stretching' : ''} ${!stretching && !playing && started ? 'unstretch' : ''}`}>
             {stretching}
             <SimplePitchContainer 
                 pitchColumn={splitColumn(column)[0]} 
