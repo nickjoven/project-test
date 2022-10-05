@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import SimpleColumn from './SimpleColumn'
 
-const SimpleEditor = ({ started, sequence, position, applyPitchPattern, mouseDown, toggleNote }) => {
+const SimpleEditor = ({ started, playing, sequence, position, applyPitchPattern, mouseDown, toggleNote }) => {
 
     const getBeat = (row, currentIndex) => {
         let beat = []
@@ -35,6 +35,7 @@ const SimpleEditor = ({ started, sequence, position, applyPitchPattern, mouseDow
                         <SimpleColumn 
                             key={columnIndex} 
                             started={started}
+                            playing={playing}
                             columnIndex={columnIndex} 
                             column={column} 
                             position={position} 

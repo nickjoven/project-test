@@ -32,28 +32,22 @@ const splitColumn = (column) => {
     return splitArray
 }
 
-const SimpleColumn = ({ started, column, columnIndex, position, applyPitchPattern, mouseDown, toggleNote }) => {
+const SimpleColumn = ({ started, playing, column, columnIndex, position, applyPitchPattern, mouseDown, toggleNote }) => {
     const [root, setRoot] = useState(0)
     const [offset, setOffset] = useState(0)
     const [transposition, setTransposition] = useState(0)
-    const [stretching, setStretching] = useState('')
-
-    const getColor = () => {
-
-    }
+    const [stretching, setStretching] = useState(false)
 
     useEffect(() => {
         if (!started) {
             return
         } else {
-            const determineStretch = () => {
-                setStretching('stretching')
+            const stretch = () => {
+                setStretching(stretching => !stretching)
             }
-            if (columnIndex == Math.floor(position / 4)) {
-                determineStretch()
-            }
+            setTimeout(stretch, (columnIndex * 250 ))
         }
-    }, [position])
+    }, [playing])
 
     useEffect(() => {
         const getOffset = () => {
@@ -63,7 +57,8 @@ const SimpleColumn = ({ started, column, columnIndex, position, applyPitchPatter
     }, [transposition])
 
     return (
-        <div className={`column ${stretching}`}>
+        <div className={`column ${stretching ? 'stretching' : ''}`}>
+            {stretching}
             <SimplePitchContainer 
                 pitchColumn={splitColumn(column)[0]} 
                 position={position} 

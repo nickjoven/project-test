@@ -4,7 +4,7 @@ html {
 
 
 body {
-  background-color: rgb(139, 139, 139);
+  background-color: #8b8b8b;
 }
 
 ::-webkit-scrollbar {
@@ -42,6 +42,11 @@ button {
   height: 20px;
   border: 0px;
   margin: 2px;
+  font-size: 0px;
+}
+
+.pitch:hover {
+  font-size: 15px;
 }
 
 .hover {
@@ -49,19 +54,23 @@ button {
 }
 
 .current-step-activated {
-  background-color: green;
+  background-color: #323232;
 }
 
 .current-step {
-  background-color: rgb(0, 197, 0);
+  background-color: #00c500;
 }
 
 .active-note {
-  background-color: rgb(50, 50, 50);
+  background-color: #323232;
 }
 
 .on-barHover {
   background-color: #43966e;
+}
+
+.on-barHover-percussion {
+  background-color: #191919;
 }
 
 .on {
@@ -69,15 +78,15 @@ button {
 }
 
 .on-pitch {
-  background-color: rgb(241, 229, 105);
+  background-color: #f1e569;
 }
 
 .on-sample-1 {
-  background-color: rgb(129, 119, 48);
+  background-color: #817730;
 }
 
 .on-sample-2 {
-  background-color: rgb(163, 149, 46);
+  background-color: #a3952e;
 }
 
 .on-percussion {
@@ -89,7 +98,7 @@ button {
 }
 
 .barHover-simple {
-  background-color: rgb(238, 188, 128)
+  background-color: #a6ee80;
 }
 
 .waiting {
@@ -97,19 +106,19 @@ button {
 }
 
 .waiting-simple-1 {
-  background-color: rgb(155, 175, 88)
+  background-color: #9fb45c;
 }
 
 .waiting-simple-2 {
-  background-color: rgb(153, 174, 90)
+  background-color: #99ae5a;
 }
 
 .waiting-simple-3 {
-  background-color: rgb(159, 180, 92)
+  background-color: #9fb45c;
 }
 
 .waiting-simple-4 {
-  background-color: rgb(162, 183, 94)
+  background-color: #a2b75e;
 }
 
 
@@ -154,7 +163,7 @@ button {
 @keyframes stretch {
   50% {
     height: 68%;
-    padding-bottom: .5%;
+    margin-bottom: .5%;
   }
 }
 
@@ -185,12 +194,13 @@ button {
   height: 100%;
   display: flex;
   justify-content: space-evenly;
+  outline: 1px solid black;
 }
 
 .pitch-button {
   width: 12.5%;
-  z-index: 10;
-  background-color: rgb(137, 148, 79);
+  z-index: 1;
+  background-color: #89944f;
   border: 0px;
   text-align: center;
   align-items: center;
@@ -219,6 +229,7 @@ button {
 .column {
   width: 12%;
   height: 60%;
+  outline: 5px solid black;
 }
 
 .simple-pitch-row {
@@ -255,4 +266,8 @@ button {
   width: 100%;
   height: 100%;
   border: 0px;
+}
+
+.ui-button {
+  outline: 3px solid black;
 }

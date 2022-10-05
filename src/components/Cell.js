@@ -43,7 +43,7 @@ const Cell = ({ note, noteIndex, rowIndex, toggleNote, position, mouseDown }) =>
 
     return (
         <>
-            <button className={`cell ${note.category} hover` + ' ' + getBackground() + ' ' + getDownbeat()} name={note.note} onMouseOver={handleMouseOver} onMouseDown={handleMouseDown} >{' '}</button>
+            <button className={`cell ${note.category} hover` + ' ' + getBackground() + ' ' + getDownbeat()} name={note.note} onMouseOver={handleMouseOver} onMouseDown={handleMouseDown} >{note.note.slice(0, -1)}</button>
         </>
     )
 }

@@ -213,14 +213,14 @@ const App = () => {
 
   return (
     <div className='App' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-      <SimpleEditor started={started} sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
+      <SimpleEditor started={started} playing={playing} sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
       <div className='inputs-container'>
       <div className='clear-button-holder'>
-        <button onClick={clearSequence}>Clear</button>
+        <button className='ui-button' onClick={clearSequence}>Clear</button>
       </div>
       <Inputs mouseDown={mouseDown} bpm={bpm} handleBpmChange={handleBpmChange} />
-      <button onClick={start}>Play</button>
-      <button onClick={showDetail}>Detail</button>
+      <button className='ui-button' onClick={start}>Play</button>
+      <button className='ui-button' onClick={showDetail}>Detail</button>
       </div>
       { detailView 
       ?

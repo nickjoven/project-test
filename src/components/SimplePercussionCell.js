@@ -22,7 +22,7 @@ const SimplePercussionCell = ({ note, rowIndex, position, sequenceIndex, mouseDo
         let barHover = sequenceIndex === (position + 32 - 3) % 32
         switch (true) {
             case noteOn && barHover:
-                return 'on-barHover'
+                return 'on-barHover-percussion'
             case noteOn && !barHover:
                 return `on-${note.category === 'sample' ? note.category+'-'+mySample : note.category}`
             case !noteOn && barHover:
