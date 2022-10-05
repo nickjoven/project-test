@@ -23,9 +23,17 @@ const Cell = ({ note, noteIndex, rowIndex, toggleNote, position }) => {
         toggleNote(rowIndex, noteIndex)
     }
 
+    const getContent = () => {
+        if (note.category === 'pitch') {
+            return note.note.slice(0, -1)
+        } else {
+            return '♪'
+        }
+    }
+
     return (
         <>
-            <button className={`cell ${note.category} hover` + ' ' + getBackground() + ' '} name={note.note} onMouseDown={handleMouseDown} >{note.note.slice(0, -1)}</button>
+            <button className={`cell ${note.category} hover` + ' ' + getBackground() + ' '} name={note.note} onMouseDown={handleMouseDown} >{getContent()}</button>
         </>
     )
 }
