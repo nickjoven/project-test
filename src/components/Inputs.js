@@ -21,7 +21,9 @@ const Inputs = ({ mouseDown, bpm, handleBpmChange }) => {
 
     return (
         <div className='inputs'>
-            {bpm}
+            <div>
+                {bpm} bpm
+            </div>
             <div className='form-container'>
                 <form onSubmit={handleSubmitBpm}>
                     <input type='range' step='1' name='bp' min='40' max='180' value={tempBpm} onChange={handleTempBpmChange} />
