@@ -5,13 +5,13 @@ const SimplePitchCell = ({ note, noteIndex, position, sequenceIndex }) => {
 
     useEffect(() => {
         const getBackground = () => {
-            setMyPixel(getNumber())
+            setMyPixel(getNumber(2))
         }
         getBackground()
     }, [])
 
-    const getNumber = () => {
-        return (Math.floor(Math.random() * 4) + 1)
+    const getNumber = (max = 2) => {
+        return (Math.floor(Math.random() * max) + 3)
     }
 
     const getBackground = () => {

@@ -1,13 +1,8 @@
 import { useState } from 'react'
 
-const Inputs = ({ mouseDown, bpm, handleBpmChange }) => {
+const Inputs = ({ bpm, handleBpmChange }) => {
 
     const [tempBpm, setTempBpm] = useState(120)
-
-    // const handleClick = (e) => {
-    //     console.log('eh')
-    //     handleBpmChange(e)
-    // }
 
     const handleTempBpmChange = (e) => {
         setTempBpm(e.target.value)
@@ -21,7 +16,7 @@ const Inputs = ({ mouseDown, bpm, handleBpmChange }) => {
 
     return (
         <div className='inputs'>
-            <div>
+            <div className='margin'>
                 {bpm} bpm
             </div>
             <div className='form-container'>

@@ -1,20 +1,20 @@
 html {
   overflow: scroll;
+  overflow-x: hidden;
 }
 
-
 body {
-  background-color: #8b8b8b;
+  background-image: url('https://art.pixilart.com/a13eea0ef7b0e3e.gif');
+  background-attachment: fixed;
 }
 
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
-  /* make scrollbar transparent */
 }
 
 .App {
-  width: auto;
+  width: 100%;
   min-height: 95vh;
   height: auto;
   text-align: center;
@@ -28,8 +28,23 @@ button {
     letter-spacing: -2px;
 }
 
+.margin {
+  margin: 1%;
+}
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+
 .row-container {
   display: flex;
+  justify-content: center;
+  /* margin: 0px 10%; */
+  padding-top: 4%;
+  background-color: #3232329d;
+  width: 100%;
 }
 .row {
   width: auto;
@@ -137,13 +152,9 @@ button {
   color: white;
 }
 
-.centered-content {
-  display: flex;
-  justify-content: center;
-}
 
 .column-container {
-  width: 1680px;
+  width: 1800px;
   height: 400px;
   display: flex;
   padding-top: 5%;
@@ -159,16 +170,6 @@ button {
   animation: stretch 5500ms;
 }
 
-@keyframes unstretch {
-  100% {
-    height: 60%;
-    margin-bottom: 0px;
-  }
-}
-
-/* .stretching:hover {
-  animation-play-state: paused;
-} */
 
 @keyframes stretch {
   50% {
@@ -179,13 +180,7 @@ button {
 
 
 .simple-editor-view {
-  margin-top: 15%;
-}
-
-.menu-objects {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 8%;
 }
 
 .simple-pitch-container {
@@ -203,12 +198,12 @@ button {
   height: 100%;
   display: flex;
   justify-content: space-evenly;
-  outline: 3px solid black;
+  outline: 3px solid #4e4724;
 }
 
 .pitch-button {
   width: 12.5%;
-  z-index: ;
+  z-index: 0;
   background-color: #89944f;
   border: 0px;
   text-align: center;
@@ -217,33 +212,34 @@ button {
   font-size: 0px;
   color: #ecd175;
   font-family: 'DotGothic16', sans-serif;
-  transition: 100ms;
+  transition: z-index 0ms, 100ms;
 }
 
 .pitch-button:hover {
   width: 25%;
-  height: 110%;
   z-index: 20;
   font-size: 20px;
 }
 
 .simple-pitch-row-container {
   height: 70%;
-  overflow: hidden;
 }
 
 .simple-percussion-container {
   height: 67%;
+  margin-top: 2px;
 }
 
 .column {
-  width: 12%;
+  width: 10%;
   height: 60%;
-  outline: 5px solid black;
+  outline: 4px solid #4e4724;
+  background-color: #a2b75e;
+  overflow: hidden;
 }
 
 .simple-pitch-row {
-  height: 2.5%; 
+  height: 1.5px; 
   display: flex;
 }
 
@@ -278,6 +274,30 @@ button {
   border: 0px;
 }
 
+.ui-buttons {
+  margin-top: 2%;
+}
+
 .ui-button {
   outline: 3px solid black;
+  width: 100px;
+  margin: 0 10px;
+}
+
+/* .toggled {
+  animation: glow 1000ms infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px -10px #eef4ae;
+  }
+
+  to {
+    box-shadow: 0 0 10px 10px #eef4ae;
+  }
+} */
+
+.inputs-container {
+  margin-top: 4%;
 }

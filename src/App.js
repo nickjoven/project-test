@@ -3,6 +3,7 @@ import * as Tone from 'tone'
 import './App.css'
 import SimpleEditor from './components/SimpleEditor'
 import Inputs from './components/Inputs'
+import UiButtons from './components/UiButtons'
 import Row from './components/Row'
 
 const stepsPerBeat = 4
@@ -213,14 +214,13 @@ const App = () => {
 
   return (
     <div className='App' onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-      <SimpleEditor started={started} playing={playing} sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
+      <SimpleEditor detailView={detailView} started={started} playing={playing} sequence={sequence} position={position} clearColumn={clearColumn} applyPitchPattern={applyPitchPattern} mouseDown={mouseDown} toggleNote={toggleNote} />
       <div className='inputs-container'>
-      <div className='clear-button-holder'>
-        <button className='ui-button' onClick={clearSequence}>Clear</button>
-      </div>
-      <Inputs mouseDown={mouseDown} bpm={bpm} handleBpmChange={handleBpmChange} />
-      <button className='ui-button' onClick={start}>Play</button>
-      <button className='ui-button' onClick={showDetail}>Detail</button>
+        <div className='clear-button-holder'>
+          <button className='ui-button' onClick={clearSequence}>Clear</button>
+        </div>
+        <Inputs mouseDown={mouseDown} bpm={bpm} handleBpmChange={handleBpmChange} />
+        <UiButtons start={start} playing={playing} showDetail={showDetail} />
       </div>
       { detailView 
       ?

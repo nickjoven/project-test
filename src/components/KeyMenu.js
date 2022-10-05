@@ -1,8 +1,6 @@
-
-
 const roots = ["I", "ii", "iii", "IV", "V", "vi", "vii°"]
 
-const KeyMenu = ({ root, setRoot, setOffset }) => {
+const KeyMenu = ({ root, setRoot }) => {
 
     const handleClick = (e) => {
         setRoot(roots.map(root => root).indexOf(e.target.name))

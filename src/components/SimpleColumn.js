@@ -2,21 +2,9 @@ import { useState, useEffect } from 'react'
 import SimplePitchContainer from './SimplePitchContainer'
 import SimplePercussionContainer from './SimplePercussionContainer'
 
-// const roots = ["I", "ii", "iii", "IV", "V", "vi", "vii°"]
-// const keys = ["C", "G", "D", "A", "E", "B", "F♯", "D♭", "A♭", "E♭", "B♭", "F"]
+const roots = ["I", "ii", "iii", "IV", "V", "vi", "vii°"]
+const keys = ["C", "G", "D", "A", "E", "B", "F♯", "D♭", "A♭", "E♭", "B♭", "F"]
 const transpositions = [0, 5, -2, 3, -4, 1, -6, -1, 4, -3, 2, -7]
-const rootColors = [
-]
-
-// const getKeys = () => {
-//     let keyArray = []
-//     for (let i = 0; i < keys.length; i++) {
-//         let keyObj = {}
-//         keyObj.key = keys[i]
-//         keyObj.transposition = transpositions[i]
-//         keyArray.push(keyObj)
-//     }
-// } 
 
 const splitColumn = (column) => {
     let splitArray = []
@@ -58,7 +46,6 @@ const SimpleColumn = ({ started, playing, column, columnIndex, position, applyPi
 
     return (
         <div className={`column ${stretching && started ? 'stretching' : ''} ${!stretching && !playing && started ? 'unstretch' : ''}`}>
-            {stretching}
             <SimplePitchContainer 
                 pitchColumn={splitColumn(column)[0]} 
                 position={position} 
